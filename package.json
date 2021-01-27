@@ -1,0 +1,20 @@
+{
+  "name": "netlify-next-issue",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "postbuild": "next-on-netlify",
+    "start": "NODE_ENV=production next start"
+  },
+  "devDependencies": {
+    "critters": "^0.0.6",
+    "next-on-netlify": "^2.6.3"
+  },
+  "dependencies": {
+    "next": "^10.0.5",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-hook-form": "^6.13.0",
+    "react-is": "^17.0.0"
+  }
+}
