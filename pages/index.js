@@ -1,13 +1,26 @@
-import * as React from 'react';
+const Redirect = () => null;
 
-const Index = () => {
-  return (
-    <main style={{ display: 'flex', flexDirection: 'column' }}>
-      <a href={`/en-us/${encodeURIComponent('x/y')}/2`}>Error</a>
-      <a href={`/en-us/${encodeURIComponent(encodeURIComponent('x/y'))}/2`}>Works</a>
-      <a href={`/en-us/x_y/2`}>Works as well</a>
-    </main>
-  )
+if (typeof window !== 'undefined') {
+  Redirect.getInitialProps = ({ req, res }) => {
+    let language = 'en-us';
+    // server side code remains the same
+    if (req.headers['accept-language']) {
+      const locale = req.headers['accept-language'];
+      if (['en-us'].includes(locale.toLowerCase())) {
+        language = locale;
+      }
+    }
+
+    const [lang, country] = language.split('-');
+    res.writeHead(302, {
+      Location: `${
+        process.env.BASE_URL
+      }/${country.toLowerCase()}/${lang.toLowerCase()}`,
+    });
+
+    res.end();
+    return {};
+  }
 }
 
-export default Index;
+export default Redirect;
