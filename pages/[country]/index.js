@@ -1,9 +1,9 @@
 const Redirect = () => null;
 
-if (typeof window !== 'undefined') {
+if (typeof window === 'undefined') {
   Redirect.getInitialProps = ({ req, res }) => {
     res.writeHead(302, {
-      Location: `${process.env.BASE_URL}`,
+      Location: `/`,
     });
 
     res.end();

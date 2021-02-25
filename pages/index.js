@@ -1,6 +1,6 @@
 const Redirect = () => null;
 
-if (typeof window !== 'undefined') {
+if (typeof window === 'undefined') {
   Redirect.getInitialProps = ({ req, res }) => {
     let language = 'en-us';
     // server side code remains the same
@@ -13,9 +13,7 @@ if (typeof window !== 'undefined') {
 
     const [lang, country] = language.split('-');
     res.writeHead(302, {
-      Location: `${
-        process.env.BASE_URL
-      }/${country.toLowerCase()}/${lang.toLowerCase()}`,
+      Location: `/${country.toLowerCase()}/${lang.toLowerCase()}`,
     });
 
     res.end();
